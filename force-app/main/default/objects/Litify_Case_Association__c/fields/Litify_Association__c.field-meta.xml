@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Litify_Association__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Litify Association</label>
+    <referenceTo>Litify_Association__c</referenceTo>
+    <relationshipLabel>Litify Associations</relationshipLabel>
+    <relationshipName>Litify_Case_Association</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
