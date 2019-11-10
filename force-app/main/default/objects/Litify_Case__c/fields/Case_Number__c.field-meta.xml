@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Case_Name__c</fullName>
+    <fullName>Case_Number__c</fullName>
+    <displayFormat>LC-{0000}</displayFormat>
     <externalId>false</externalId>
-    <label>Case Name</label>
-    <length>100</length>
-    <required>true</required>
+    <label>Case Number</label>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>AutoNumber</type>
 </CustomField>

@@ -3,19 +3,20 @@ import { refreshApex } from '@salesforce/apex';
 import getAllLitifyCases from '@salesforce/apex/LWCCaseMemberHierarchyController.getAllLitifyCases';
 
 const actions = [
-    { label: 'Show Details', name: 'show_details' }
+	{ label: 'Show Details', name: 'show_details' },
+	{ label: 'View Associations', name: 'view_associations'}
 ];
 
 const columns = [
-	{label: 'Case Number', fieldName: 'Name', sortable: true, sortedBy: 'Name'},
-	{label: 'Case Name', fieldName: 'Case_Name__c', sortable: true},
+	{label: 'Case Number', fieldName: 'Case_Number__c', sortable: true, sortedBy: 'Case_Number__c'},
+	{label: 'Case Name', fieldName: 'Name', sortable: true, sortedBy: 'Name'},
 	{type: 'action', typeAttributes: { rowActions: actions }}
 ];
 
 export default class CaseMemberHierarchy extends LightningElement {
 	@track columns = columns;
 	@track error;
-	@track litifyCaseId = null;
+	@track d = null;
 	@track litifyCases = null;
 	@track modalIsOpen = false;
 	@track sortBy;
@@ -97,7 +98,11 @@ export default class CaseMemberHierarchy extends LightningElement {
             case 'show_details':
 				this.litifyCaseId = row.Id;
 				this.openModal();
-                break;
+				break;
+			case 'view_associations':
+				console.log('view_associations');
+				this.litifyCaseId = row.Id;
+				break;
             default:
         }
 	}

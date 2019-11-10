@@ -5,7 +5,7 @@ public with sharing class LWCCaseMemberHierarchyController {
             SELECT 
                 Id,
                 Name,
-                Case_Name__c
+                Case_Number__c
             FROM
                 Litify_Case__c
         ];

@@ -8,12 +8,12 @@
         <label>Fields</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Required</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>Case_Name__c</field>
+                <behavior>Readonly</behavior>
+                <field>Case_Number__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
