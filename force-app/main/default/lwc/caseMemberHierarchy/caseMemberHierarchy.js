@@ -19,6 +19,7 @@ export default class CaseMemberHierarchy extends LightningElement {
 	@track d = null;
 	@track litifyCases = null;
 	@track modalIsOpen = false;
+	@track showAssociations = false;
 	@track sortBy;
 	@track sortDirection;
 	
@@ -94,14 +95,22 @@ export default class CaseMemberHierarchy extends LightningElement {
 	handleRowAction(event) {
         const actionName = event.detail.action.name;
 		const row = event.detail.row;
+		console.log('row: ' + row);
+		console.log('row.Id: ' + row.Id);
         switch (actionName) {
             case 'show_details':
 				this.litifyCaseId = row.Id;
+				// this.showAssociations = true;
 				this.openModal();
 				break;
 			case 'view_associations':
 				console.log('view_associations');
 				this.litifyCaseId = row.Id;
+				console.log('this.litifyCaseId: ' + this.litifyCaseId);
+				this.showAssociations = true;
+				console.log('this.showAssociations: ' + this.showAssociations);
+				// this.template.querySelector('c-associations').reloadAssocations();
+				console.log('after reload');
 				break;
             default:
         }

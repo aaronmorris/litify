@@ -29,7 +29,7 @@
 		</div>
 	</template>
 	<div style="text-align: center;"><lightning-button variant="brand" label="Add a New Case" title="Add a New Case" class="slds-m-left_x-small" onclick={openModal}></lightning-button></div>
-	<template if:true={litifyCaseId}>
+	<template if:true={showAssociations}>
 		<c-associations case-id={litifyCaseId}></c-associations>
 	</template>
 </template>

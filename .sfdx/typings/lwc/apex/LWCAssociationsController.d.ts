@@ -1,3 +1,3 @@
-declare module "@salesforce/apex/LWCAssociationsController.getAssociations" {
-  export default function getAssociations(param: {caseId: any}): Promise<any>;
+declare module "@salesforce/apex/LWCAssociationsController.getAssociationsByCase" {
+  export default function getAssociationsByCase(param: {caseId: any}): Promise<any>;
 }

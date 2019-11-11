@@ -1,3 +1,14 @@
 <template>
-    
+	Assocations
+	<lightning-tree
+		items={associationData}
+		header="Associations">
+	</lightning-tree>
+	<lightning-tree-grid
+		data={associationData}
+		columns={columns}
+		key-field="label"
+		onrowaction={handleRowAction}
+		hide-checkbox-column>
+	</lightning-tree-grid>
 </template>

@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <label>Parent Association</label>
     <referenceTo>Litify_Association__c</referenceTo>
-    <relationshipLabel>Parent Litify Associations</relationshipLabel>
+    <relationshipLabel>Litify Associations</relationshipLabel>
     <relationshipName>Litify_Parent_Associations</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
