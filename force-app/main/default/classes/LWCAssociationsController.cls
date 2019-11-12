@@ -57,8 +57,6 @@ public with sharing class LWCAssociationsController {
 
 	@AuraEnabled
 	public static void removeAssociation(Id associationId, Id caseId){
-		System.debug('>>> associationid: ' + associationId);
-		System.debug('>>> caseId: ' + caseId);
 		Litify_Association__c association = [SELECT Id FROM Litify_Association__c WHERE Id = :associationId];
 		Litify_Case_Association__c caseAssociation = [SELECT Id FROM Litify_Case_Association__c WHERE Litify_Case__c = :caseId AND Litify_Association__c = :associationId];
 		List<SObject> objectsToRemove = new List<SObject> {association, caseAssociation};

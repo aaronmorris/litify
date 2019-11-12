@@ -42,8 +42,6 @@ export default class associations extends LightningElement {
 
 	handleRowAction(event) {
 		const row = event.detail.row;
-		console.log('row: ', row);
-		console.log('row.parent: ', row.parent);
 		const actionName = event.detail.action.name;
 		if (actionName == 'add_association') {
 			if (row.parentId != null) {
@@ -123,17 +121,14 @@ export default class associations extends LightningElement {
 					else {
 						let existingAssociation = associationMap.get(parentId);
 						if (existingAssociation != null) {
-							console.log('a');
 							existingAssociation.items.push({associationId: results[i].Id, label: results[i].Name, metatext: results[i].Role__c, parentId: results[i].Parent_Association__c, actionLabel: null, actionDisabled: true, removeDisabled: true});
-							console.log('b');
 							if (existingAssociation._children == null) {
 								existingAssociation._children = [];
 								existingAssociation.removeLabel = null;
 								existingAssociation.removeDisabled = true;
 							}
-							console.log('c');
+
 							existingAssociation._children.push({associationId: results[i].Id, label: results[i].Name, metatext: results[i].Role__c, parentId: results[i].Parent_Association__c, actionLabel: null, actionDisabled: true, removeLabel: 'Remove Association 3', removeDisabled: false});
-							console.log('d');
 						}
 
 						associationMap.set(parentId, existingAssociation);
@@ -141,7 +136,6 @@ export default class associations extends LightningElement {
 				}
 
 				for (let associationItem of associationMap.values()) {
-					console.log('set id: ' + associationItem.associationId);
 					this.associationData.push(associationItem);
 				}
 
