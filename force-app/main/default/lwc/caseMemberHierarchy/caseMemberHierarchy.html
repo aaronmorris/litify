@@ -1,4 +1,5 @@
 <template>
+	<div class="slds-box slds-theme_default">
 	<lightning-datatable
 		key-field="Id"
 		data={litifyCases}
@@ -28,8 +29,11 @@
 			</section>
 		</div>
 	</template>
+	<br style="clear:both;" />
 	<div style="text-align: center;"><lightning-button variant="brand" label="Add a New Case" title="Add a New Case" class="slds-m-left_x-small" onclick={openModal}></lightning-button></div>
+	<br style="clear:both;" />
 	<template if:true={showAssociations}>
 		<c-associations case-id={litifyCaseId}></c-associations>
 	</template>
+</div>
 </template>

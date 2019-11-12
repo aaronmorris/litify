@@ -1,5 +1,5 @@
 public with sharing class LWCCaseMemberHierarchyController {
-    @AuraEnabled(cacheable=false)
+    @AuraEnabled
     public static List<Litify_Case__c> getAllLitifyCases() {
         List<Litify_Case__c> litifyCases = [
             SELECT 

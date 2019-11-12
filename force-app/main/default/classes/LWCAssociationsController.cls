@@ -1,8 +1,6 @@
 public with sharing class LWCAssociationsController {
-	@AuraEnabled
-	// public static Map<Id, Association> getAssociationsByCase(Id caseId){
+	@AuraEnabled(cacheable=false)
 	public static List<Litify_Association__c> getAssociationsByCase(Id caseId){
-		System.debug('>>> caseId: ' + caseId);
 		List<Litify_Association__c> associations = [
 			SELECT  
 				Id,
@@ -12,9 +10,9 @@ public with sharing class LWCAssociationsController {
 			FROM Litify_Association__c
 			WHERE 
 				Id IN (SELECT Litify_Association__c FROM Litify_Case_Association__c WHERE Litify_Case__c = :caseId)
+				AND Parent_Association__c = NULL
+			ORDER BY Name
 		];
-
-		System.debug('>>> associations: ' + associations);
 
 		List<Id> potentialParentIds = new List<Id>();
 		for (Litify_Association__c association : associations) {
@@ -29,59 +27,31 @@ public with sharing class LWCAssociationsController {
 				Parent_Association__c
 			FROM Litify_Association__c
 			WHERE Parent_Association__c IN :potentialParentIds
+			ORDER BY Name
 		];
 
-		System.debug('>>> child assoications: ' + childAssociations);
-
 		associations.addAll(childAssociations);
-		System.debug('>>> associations: ' + associations);
 		return associations;
 	}
 
-	// public static Map<Id, Association> getChildAssociations(List<Id> parentAssociationIds) {
-	// 	Map<Id, Association> assoicationTreeMap = new Map<Id, Association>();
-	// 	List<Association> associations = new List<Association>();
-	// 	for (Litify_Association__c litifyAssociation : getAssociationsByParentIds(parentAssociationIds)) {
-	// 		Association tempAssociation = assoicationTreeMap.get(litifyAssociation.Parent_Association__c);
-	// 		if (tempAssociation == null) {
-	// 			System.debug('>>> new');
-	// 			tempAssociation = new Association(litifyAssociation);
-	// 		}
-	// 		else {
-	// 			System.debug('>>> update');
-	// 			Association childAssociation = new Association();
-	// 			childAssociation.Name = litifyAssociation.Name;
-	// 			childAssociation.Role = litifyAssociation.Role__c;
-	// 			// childAssociation.Id = litifyAssociation.Id;
-	// 			childAssociation.items = null;
-	// 			tempAssociation.items.add(childAssociation);
-	// 		}
+	@AuraEnabled
+	public static Litify_Association__c addAssociation(Id caseId, String name, String role, String otherRole, Id parentAssociationId) {
+		Litify_Association__c association = new Litify_Association__c(
+			Name = name,
+			Role__c = role,
+			Other_Role__c = otherRole,
+			Parent_Association__c = parentAssociationId
+		);
 
-	// 		System.debug('>>> tempAssociation: ' + tempAssociation);
+		insert association;
 
-	// 		assoicationTreeMap.put(litifyAssociation.Parent_Association__c, tempAssociation);
-	// 	}
+		Litify_Case_Association__c caseAssociation = new Litify_Case_Association__c(
+			Litify_Case__c = caseId,
+			Litify_Association__c = association.Id
+		);
 
-	// 	System.debug('>>> assoicationTreeMap: '+ assoicationTreeMap);
-	// 	return assoicationTreeMap;
-	// }
+		insert caseAssociation;
 
-	private static List<Litify_Association__c> getAssociationsByParentIds(List<Id> parentAssociationIds) {
-		List<Litify_Association__c> associations = [
-			SELECT 
-				Id, 
-				Name, 
-				Role__c, 
-				Parent_Association__c, 
-				Parent_Association__r.Name,
-				Parent_Association__r.Role__c 
-			FROM Litify_Association__c 
-			WHERE Parent_Association__c IN :parentAssociationIds];
-
-		return associations;
+		return association;
 	}
-
-	// public class Association {
-		
-	// }
 }

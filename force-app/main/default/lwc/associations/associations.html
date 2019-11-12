@@ -1,9 +1,8 @@
 <template>
-	Assocations
-	<lightning-tree
+	<!-- <lightning-tree
 		items={associationData}
 		header="Associations">
-	</lightning-tree>
+	</lightning-tree> -->
 	<lightning-tree-grid
 		data={associationData}
 		columns={columns}
@@ -11,4 +10,33 @@
 		onrowaction={handleRowAction}
 		hide-checkbox-column>
 	</lightning-tree-grid>
+	<template if:true={modalIsOpen} style="z-index:1000;">
+		<div class="demo-only" style="height: 640px; z-index:100;">
+			<section role="dialog" style="z-index:100;" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<header class="slds-modal__header" style="z-index:100;">
+						<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal} style="position:unset; float:right;">
+							<lightning-icon icon-name="utility:close" size="medium">
+							</lightning-icon>
+							<span class="slds-assistive-text">Close</span>
+						</button>
+						<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Litify Association</h2>
+					</header>
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+						<lightning-record-edit-form record-id={currentAssociationId} object-api-name="Litify_Association__c">
+							<lightning-input-field field-name="Name" data-id="name"></lightning-input-field>
+							<template if:true={showParent}>
+								<lightning-input-field field-name="Parent_Association__c" disabled value={currentParentId} data-id="parentAssociationId"></lightning-input-field>
+							</template>
+							<lightning-input-field field-name="Role__c" data-id="role"></lightning-input-field>
+						</lightning-record-edit-form>
+					</div>
+					<footer class="slds-modal__footer">
+						<lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+					</footer>
+				</div>
+			</section>
+		</div>
+	</template>
 </template>

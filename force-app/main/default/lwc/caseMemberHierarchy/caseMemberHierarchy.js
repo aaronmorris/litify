@@ -8,6 +8,7 @@ const actions = [
 ];
 
 const columns = [
+	{label: 'Id', fieldName: 'Id'},
 	{label: 'Case Number', fieldName: 'Case_Number__c', sortable: true, sortedBy: 'Case_Number__c'},
 	{label: 'Case Name', fieldName: 'Name', sortable: true, sortedBy: 'Name'},
 	{type: 'action', typeAttributes: { rowActions: actions }}
@@ -97,6 +98,7 @@ export default class CaseMemberHierarchy extends LightningElement {
 		const row = event.detail.row;
 		console.log('row: ' + row);
 		console.log('row.Id: ' + row.Id);
+		this.showAssociations = false;
         switch (actionName) {
             case 'show_details':
 				this.litifyCaseId = row.Id;
@@ -109,7 +111,11 @@ export default class CaseMemberHierarchy extends LightningElement {
 				console.log('this.litifyCaseId: ' + this.litifyCaseId);
 				this.showAssociations = true;
 				console.log('this.showAssociations: ' + this.showAssociations);
-				// this.template.querySelector('c-associations').reloadAssocations();
+				let associationsComponent = this.template.querySelector('c-associations');
+				if(associationsComponent) {
+					associationsComponent.caseId = this.litifyCaseId;
+					associationsComponent.reloadAssociations();
+				}
 				console.log('after reload');
 				break;
             default:
