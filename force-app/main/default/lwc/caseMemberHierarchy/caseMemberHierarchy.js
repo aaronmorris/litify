@@ -29,32 +29,23 @@ export default class CaseMemberHierarchy extends LightningElement {
 	}
 
 	openModal() {
-		console.log('openModal');
 		this.modalIsOpen = true;
 	}
 
 	closeModal() {
-		// todo: fix this - already making a round trip to save and a new value is being returned, figure out how to use that instead of making another apex call 
+		// todo: look into this - already making a round trip to save and a new value is being returned, figure out how to use that instead of making another apex call 
 		this.loadLitifyCases();
 		this.litifyCaseId = null;
 		this.modalIsOpen = false;
 	}
 
-	// The method onsort event handler
 	handleSortData(event) {
-		console.log('handleSortData');
-        // field name
-        this.sortBy = event.detail.fieldName;
-
-        // sort direction
-        this.sortDirection = event.detail.sortDirection;
-
-        // calling sortdata function to sort the data based on direction and selected field
-        this.sortData(event.detail.fieldName, event.detail.sortDirection);
-    }
+		this.sortBy = event.detail.fieldName;
+		this.sortDirection = event.detail.sortDirection;
+		this.sortData(event.detail.fieldName, event.detail.sortDirection);
+	}
 
    sortData(fieldname, direction) {
-	   console.log('sortData');
 		// serialize the data before calling sort function
 		let parseData = JSON.parse(JSON.stringify(this.litifyCases));
 
@@ -68,7 +59,7 @@ export default class CaseMemberHierarchy extends LightningElement {
 
 		// sorting data 
 		parseData.sort((x, y) => {
-			x = keyValue(x) ? keyValue(x) : ''; // handling null values
+			x = keyValue(x) ? keyValue(x) : '';
 			y = keyValue(y) ? keyValue(y) : '';
 
 			// sorting values based on direction
@@ -81,44 +72,35 @@ export default class CaseMemberHierarchy extends LightningElement {
 }
 
 	loadLitifyCases() {
-		console.log('loadLitifyCases');
 		getAllLitifyCases()
 			.then(results => {
 				this.litifyCases = results;
-				console.log('got results');
 			})
 			.catch(error => {
-				this.error = error;
-				console.log('error fool');	
+				// TODO: show/handle error
+				this.error = error;	
 			})
 	}
 	
 	handleRowAction(event) {
-        const actionName = event.detail.action.name;
+		const actionName = event.detail.action.name;
 		const row = event.detail.row;
-		console.log('row: ' + row);
-		console.log('row.Id: ' + row.Id);
 		this.showAssociations = false;
-        switch (actionName) {
-            case 'show_details':
+		switch (actionName) {
+			case 'show_details':
 				this.litifyCaseId = row.Id;
-				// this.showAssociations = true;
 				this.openModal();
 				break;
 			case 'view_associations':
-				console.log('view_associations');
 				this.litifyCaseId = row.Id;
-				console.log('this.litifyCaseId: ' + this.litifyCaseId);
 				this.showAssociations = true;
-				console.log('this.showAssociations: ' + this.showAssociations);
 				let associationsComponent = this.template.querySelector('c-associations');
 				if(associationsComponent) {
 					associationsComponent.caseId = this.litifyCaseId;
 					associationsComponent.reloadAssociations();
 				}
-				console.log('after reload');
 				break;
-            default:
-        }
+			default:
+		}
 	}
 }

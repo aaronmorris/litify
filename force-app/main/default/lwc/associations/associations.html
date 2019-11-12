@@ -6,12 +6,12 @@
 	<lightning-tree-grid
 		data={associationData}
 		columns={columns}
-		key-field="label"
+		key-field="associationId"
 		onrowaction={handleRowAction}
 		hide-checkbox-column>
 	</lightning-tree-grid>
 	<template if:true={modalIsOpen} style="z-index:1000;">
-		<div class="demo-only" style="height: 640px; z-index:100;">
+		<div style="height: 640px; z-index:100;">
 			<section role="dialog" style="z-index:100;" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
 				<div class="slds-modal__container">
 					<header class="slds-modal__header" style="z-index:100;">
@@ -34,6 +34,29 @@
 					<footer class="slds-modal__footer">
 						<lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
 						<lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+					</footer>
+				</div>
+			</section>
+		</div>
+	</template>
+	<template if:true={removeModalIsOpen} style="z-index:1000;">
+		<div style="height: 400; z-index:100;">
+			<section role="dialog" style="z-index:100;" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<header class="slds-modal__header" style="z-index:100;">
+						<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeRemoveModal} style="position:unset; float:right;">
+							<lightning-icon icon-name="utility:close" size="medium">
+							</lightning-icon>
+							<span class="slds-assistive-text">Close</span>
+						</button>
+						<h2 class="slds-text-heading_medium slds-hyphenate">Remove Association?</h2>
+					</header>
+					<div class="slds-modal__content slds-p-around_medium">
+						Are you sure you want to remove the association {associationName}
+					</div>
+					<footer class="slds-modal__footer">
+						<lightning-button label="Cancel" variant="neutral" onclick={closeRemoveModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<lightning-button label="Remove" variant="brand" onclick={removeMethod}></lightning-button>
 					</footer>
 				</div>
 			</section>

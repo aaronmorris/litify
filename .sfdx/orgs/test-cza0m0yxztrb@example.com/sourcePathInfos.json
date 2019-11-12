@@ -63,10 +63,10 @@
         {
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/classes/LWCCaseMemberHierarchyController.cls",
             "isDirectory": false,
-            "size": 430,
-            "modifiedTime": 1573446275492,
-            "changeTime": 1573446275492,
-            "contentHash": "7d1cf75f09b0fce0eb0786e85e2f25b5e6ec6a92",
+            "size": 280,
+            "modifiedTime": 1573523478562,
+            "changeTime": 1573523478562,
+            "contentHash": "8f783db21f36ec89a3c3646735e7500259c5ef7a",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -398,15 +398,15 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/caseMemberHierarchy/caseMemberHierarchy.html",
         {
-            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/caseMemberHierarchy/caseMemberHierarchy.html",
             "isDirectory": false,
+            "size": 1709,
+            "modifiedTime": 1573528932882,
+            "changeTime": 1573528932882,
+            "contentHash": "d758834ee9d1c3d7cab03f4da3fb25c19b4af44c",
             "isMetadataFile": false,
-            "size": 1727,
-            "modifiedTime": 1573446957735,
-            "changeTime": 1573446957735,
-            "isWorkspace": false,
-            "contentHash": "1a12ed87bd805b149b533b5e4604c10cf6ca1c13"
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -414,10 +414,10 @@
         {
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/caseMemberHierarchy/caseMemberHierarchy.js",
             "isDirectory": false,
-            "size": 3558,
-            "modifiedTime": 1573446216689,
-            "changeTime": 1573446216689,
-            "contentHash": "1ebd5b51013626f73ec4b2a9e1f143e885dbe70d",
+            "size": 2847,
+            "modifiedTime": 1573523663468,
+            "changeTime": 1573523663468,
+            "contentHash": "7fe1288b38c07612f16a16f9b3978b9e28076d2c",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -585,10 +585,10 @@
         {
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/classes/LWCAssociationsController.cls",
             "isDirectory": false,
-            "size": 1784,
-            "modifiedTime": 1573445026704,
-            "changeTime": 1573445026704,
-            "contentHash": "56a4e0bcef6dec089ee7aaad447b76179d4a9f32",
+            "size": 2063,
+            "modifiedTime": 1573530453012,
+            "changeTime": 1573530453012,
+            "contentHash": "ca655127a06422bf63ab1d4cd81b1dad0d457cba",
             "isMetadataFile": false,
             "state": "u"
         }
@@ -609,14 +609,14 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/associations/associations.html",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/associations/associations.html",
             "isDirectory": false,
-            "size": 2090,
-            "modifiedTime": 1573446780353,
-            "changeTime": 1573446780353,
-            "contentHash": "bd243d2281348a1c264adeaf78be60c73a715efa",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 3379,
+            "modifiedTime": 1573533009886,
+            "changeTime": 1573533009886,
+            "contentHash": "234e2ff287de7df6d476ca0e11572abb91d4428b"
         }
     ],
     [
@@ -624,10 +624,10 @@
         {
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/associations/associations.js",
             "isDirectory": false,
-            "size": 4699,
-            "modifiedTime": 1573444893022,
-            "changeTime": 1573444893022,
-            "contentHash": "3f2a53323e2c6b21cc9b10740a22173afc939d3e",
+            "size": 5794,
+            "modifiedTime": 1573532909327,
+            "changeTime": 1573532909327,
+            "contentHash": "56966b3a4633f0dcd96a39c1fa87bd13aa99a67a",
             "isMetadataFile": false,
             "state": "u"
         }
