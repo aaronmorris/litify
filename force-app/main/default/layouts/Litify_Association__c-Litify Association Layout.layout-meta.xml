@@ -18,6 +18,10 @@
                 <behavior>Edit</behavior>
                 <field>Parent_Association__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Other_Role__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

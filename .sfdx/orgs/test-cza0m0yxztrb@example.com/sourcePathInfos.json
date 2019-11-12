@@ -147,53 +147,53 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml",
             "isDirectory": false,
-            "size": 6643,
-            "modifiedTime": 1573406112129,
-            "changeTime": 1573406112129,
-            "contentHash": "e101a557636f75b97830489f4a911a343d18b692",
             "isMetadataFile": true,
-            "state": "u"
+            "size": 6817,
+            "modifiedTime": 1573533644851,
+            "changeTime": 1573533644851,
+            "contentHash": "70c1dc756463e57bc8e88d3bc56434437484dab1"
         }
     ],
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml",
             "isDirectory": false,
-            "size": 6305,
-            "modifiedTime": 1573406112141,
-            "changeTime": 1573406112141,
-            "contentHash": "61d022cabe8d9e0993700a3bc27ebba3ba747f1b",
             "isMetadataFile": true,
-            "state": "u"
+            "size": 6479,
+            "modifiedTime": 1573533644862,
+            "changeTime": 1573533644862,
+            "contentHash": "e7d09bfc2eec5dec63a541e16e599c6555397dca"
         }
     ],
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml",
             "isDirectory": false,
-            "size": 6305,
-            "modifiedTime": 1573406112155,
-            "changeTime": 1573406112155,
-            "contentHash": "61d022cabe8d9e0993700a3bc27ebba3ba747f1b",
             "isMetadataFile": true,
-            "state": "u"
+            "size": 6479,
+            "modifiedTime": 1573533644877,
+            "changeTime": 1573533644877,
+            "contentHash": "e7d09bfc2eec5dec63a541e16e599c6555397dca"
         }
     ],
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Admin.profile-meta.xml",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/profiles/Admin.profile-meta.xml",
             "isDirectory": false,
-            "size": 22324,
-            "modifiedTime": 1573406112203,
-            "changeTime": 1573406112203,
-            "contentHash": "ee7d882a381a5effb7719d80af59e271b6b1af52",
             "isMetadataFile": true,
-            "state": "u"
+            "size": 22608,
+            "modifiedTime": 1573533644929,
+            "changeTime": 1573533644929,
+            "contentHash": "6fc090fb97647966069f2db4a51809fde2e3f775"
         }
     ],
     [
@@ -329,29 +329,27 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Association__c/fields",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Association__c/fields",
             "isDirectory": true,
-            "size": 128,
-            "modifiedTime": 1573406112066,
-            "changeTime": 1573406112066,
-            "contentHash": "e87ec148c27bda4f4ba7625842b510d73c5a8a51",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 160,
+            "modifiedTime": 1573533644820,
+            "changeTime": 1573533644820,
+            "contentHash": "1818684b0ff2e22037664ed0930d418b43ca148c"
         }
     ],
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c",
             "isDirectory": true,
-            "size": 128,
-            "modifiedTime": 1572900263893,
-            "changeTime": 1573258893813,
-            "contentHash": "d99534c66ee1b69e0cd41a142c3f35ad338686f0",
             "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "size": 160,
+            "modifiedTime": 1573533644824,
+            "changeTime": 1573533644824,
+            "contentHash": "5bff25580b853335eb26d381eace32767cbdc63c"
         }
     ],
     [
@@ -609,14 +607,14 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/associations/associations.html",
         {
-            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/lwc/associations/associations.html",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 3379,
             "modifiedTime": 1573533009886,
             "changeTime": 1573533009886,
-            "contentHash": "234e2ff287de7df6d476ca0e11572abb91d4428b"
+            "contentHash": "234e2ff287de7df6d476ca0e11572abb91d4428b",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [
@@ -752,14 +750,14 @@
     [
         "/Users/aaron/Documents/GitHub/litify/force-app/main/default/layouts/Litify_Association__c-Litify Association Layout.layout-meta.xml",
         {
+            "state": "u",
             "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/layouts/Litify_Association__c-Litify Association Layout.layout-meta.xml",
             "isDirectory": false,
-            "size": 2449,
-            "modifiedTime": 1573406112102,
-            "changeTime": 1573406112102,
-            "contentHash": "ba3fbc1db7e6522bb96c719a9a2c73cb849e87c5",
             "isMetadataFile": true,
-            "state": "u"
+            "size": 2589,
+            "modifiedTime": 1573533644832,
+            "changeTime": 1573533644832,
+            "contentHash": "f488ef3d37dc5d8db442b3664d19bcd574893919"
         }
     ],
     [
@@ -838,6 +836,45 @@
             "contentHash": "51198b690a5e6747d76cacdf0ad588e54746cc82",
             "isMetadataFile": false,
             "state": "u"
+        }
+    ],
+    [
+        "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Association__c/fields/Other_Role__c.field-meta.xml",
+        {
+            "state": "u",
+            "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Association__c/fields/Other_Role__c.field-meta.xml",
+            "isDirectory": false,
+            "isMetadataFile": true,
+            "size": 366,
+            "modifiedTime": 1573533644820,
+            "changeTime": 1573533644820,
+            "contentHash": "00e7df7211fca066d1edeec31d39f962551c129f"
+        }
+    ],
+    [
+        "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c/listViews/All.listView-meta.xml",
+        {
+            "state": "u",
+            "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c/listViews/All.listView-meta.xml",
+            "isDirectory": false,
+            "isMetadataFile": true,
+            "size": 315,
+            "modifiedTime": 1573533644824,
+            "changeTime": 1573533644824,
+            "contentHash": "c72785ef7dab2cf37946d38e067a8dbf4b0e004d"
+        }
+    ],
+    [
+        "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c/listViews",
+        {
+            "state": "u",
+            "sourcePath": "/Users/aaron/Documents/GitHub/litify/force-app/main/default/objects/Litify_Case_Association__c/listViews",
+            "isDirectory": true,
+            "isMetadataFile": false,
+            "size": 96,
+            "modifiedTime": 1573533644824,
+            "changeTime": 1573533644824,
+            "contentHash": "0b3931647b535802350a588b8bf16d4ae6cc2ed6"
         }
     ]
 ]
