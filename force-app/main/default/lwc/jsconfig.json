@@ -2,17 +2,17 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "c/associations": [
-                "associations/associations.js"
-            ],
-            "c/caseMemberHierarchy": [
-                "caseMemberHierarchy/caseMemberHierarchy.js"
-            ],
             "c/litifyCase": [
                 "litifyCase/litifyCase.js"
             ],
             "c/utilities": [
                 "utilities/utilities.js"
+            ],
+            "c/associations": [
+                "associations/associations.js"
+            ],
+            "c/caseMemberHierarchy": [
+                "caseMemberHierarchy/caseMemberHierarchy.js"
             ]
         },
         "experimentalDecorators": true

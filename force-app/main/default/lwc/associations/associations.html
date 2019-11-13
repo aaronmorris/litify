@@ -10,6 +10,9 @@
 		onrowaction={handleRowAction}
 		hide-checkbox-column>
 	</lightning-tree-grid>
+	<br style="clear:both;" />
+	<div style="text-align: center;"><lightning-button variant="brand" label="Add a New Association" title="Add a New Association" class="slds-m-left_x-small" onclick={addTopLevelAssociation}></lightning-button></div>
+	<br style="clear:both;" />
 	<template if:true={modalIsOpen} style="z-index:1000;">
 		<div style="height: 640px; z-index:100;">
 			<section role="dialog" style="z-index:100;" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
@@ -30,6 +33,7 @@
 							</template>
 							<lightning-input-field field-name="Role__c" data-id="role"></lightning-input-field>
 						</lightning-record-edit-form>
+						
 					</div>
 					<footer class="slds-modal__footer">
 						<lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
