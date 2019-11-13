@@ -1,5 +1,4 @@
 import { LightningElement, track } from 'lwc';
-import { refreshApex } from '@salesforce/apex';
 import getAllLitifyCases from '@salesforce/apex/LWCCaseMemberHierarchyController.getAllLitifyCases';
 
 const actions = [
