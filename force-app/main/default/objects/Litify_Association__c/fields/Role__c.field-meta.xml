@@ -25,6 +25,31 @@
                 <default>false</default>
                 <label>Other</label>
             </value>
+            <value>
+                <fullName>Insurance Company</fullName>
+                <default>false</default>
+                <label>Insurance Company</label>
+            </value>
+            <value>
+                <fullName>Insurance Agent</fullName>
+                <default>false</default>
+                <label>Insurance Agent</label>
+            </value>
+            <value>
+                <fullName>Hospital</fullName>
+                <default>false</default>
+                <label>Hospital</label>
+            </value>
+            <value>
+                <fullName>Doctor</fullName>
+                <default>false</default>
+                <label>Doctor</label>
+            </value>
+            <value>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+                <label>Nurse</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

@@ -41,7 +41,7 @@
         <layout>Litify_Case_Association__c-Litify Case Association Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Litify_Case__c-Litify Case Layout</layout>
+        <layout>Litify_Case__c-Litify</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
