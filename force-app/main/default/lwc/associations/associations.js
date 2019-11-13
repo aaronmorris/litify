@@ -10,7 +10,7 @@ const actions = [
 ];
 
 const columns = [
-	{label: 'Id', fieldName: 'associationId', type: 'text'},
+	// {label: 'Id', fieldName: 'associationId', type: 'text'},
 	{label: 'Name', fieldName: 'label', type: 'text'},
 	{label: 'Role', fieldName: 'metatext', type: 'text'},
 	// {label: 'Add Association', type: 'button', typeAttributes: { label: {fieldName: 'actionLabel'}, title: 'Add New Association', disabled: {fieldName: 'actionDisabled'}, class:'btn_next'}, name: 'add', action: 'add'},
@@ -38,6 +38,12 @@ export default class associations extends LightningElement {
 
 	connectedCallback() {
 		this.loadAssociations();
+	}
+
+	addTopLevelAssociation() {
+		this.currentParentId = null;
+		this.showParent = false;
+		this.modalIsOpen = true;
 	}
 
 	handleRowAction(event) {
@@ -104,7 +110,7 @@ export default class associations extends LightningElement {
 			this.loadAssociations();
 		})
 		.catch(error => {
-			showToastMessage('error', 'Error', error.message);
+			showToastMessage('error', 'Error', error.body.message);
 		})
 	}
 
@@ -138,9 +144,6 @@ export default class associations extends LightningElement {
 				for (let associationItem of associationMap.values()) {
 					this.associationData.push(associationItem);
 				}
-
-				// TODO: Replace this with a better add row
-				this.associationData.push({label: null, metatext: null, actionLabel: 'Add Association'});
 			})
 			.catch(error => {
 				showToastMessage('error', 'Error', error.message);

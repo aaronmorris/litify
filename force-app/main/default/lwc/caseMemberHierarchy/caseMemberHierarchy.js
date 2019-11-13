@@ -8,7 +8,7 @@ const actions = [
 ];
 
 const columns = [
-	{label: 'Id', fieldName: 'Id'},
+	// {label: 'Id', fieldName: 'Id'},
 	{label: 'Case Number', fieldName: 'Case_Number__c', sortable: true, sortedBy: 'Case_Number__c'},
 	{label: 'Case Name', fieldName: 'Name', sortable: true, sortedBy: 'Name'},
 	{type: 'action', typeAttributes: { rowActions: actions }}
