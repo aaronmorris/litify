@@ -2,13 +2,13 @@ public with sharing class LWCAssociationsController {
 	@AuraEnabled(cacheable=false)
 	public static List<Litify_Association__c> getAssociationsByCase(Id caseId){
 		List<Litify_Association__c> associations = [
-			SELECT  
+			SELECT
 				Id,
 				Name,
 				Role__c,
 				Parent_Association__c
 			FROM Litify_Association__c
-			WHERE 
+			WHERE
 				Id IN (SELECT Litify_Association__c FROM Litify_Case_Association__c WHERE Litify_Case__c = :caseId)
 				AND Parent_Association__c = NULL
 			ORDER BY Name
@@ -20,10 +20,10 @@ public with sharing class LWCAssociationsController {
 		}
 
 		List<Litify_Association__c> childAssociations = [
-			SELECT 
-				Id, 
-				Name, 
-				Role__c, 
+			SELECT
+				Id,
+				Name,
+				Role__c,
 				Parent_Association__c
 			FROM Litify_Association__c
 			WHERE Parent_Association__c IN :potentialParentIds
@@ -60,7 +60,7 @@ public with sharing class LWCAssociationsController {
 		Litify_Association__c association = [SELECT Id FROM Litify_Association__c WHERE Id = :associationId];
 		Litify_Case_Association__c caseAssociation = [SELECT Id FROM Litify_Case_Association__c WHERE Litify_Case__c = :caseId AND Litify_Association__c = :associationId];
 		List<SObject> objectsToRemove = new List<SObject> {association, caseAssociation};
-		
+
 		delete objectsToRemove;
 	}
 }

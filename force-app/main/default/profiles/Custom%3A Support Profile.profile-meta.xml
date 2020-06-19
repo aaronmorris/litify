@@ -34,6 +34,26 @@
         <field>Litify_Case__c.Case_Number__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Litify_Data_Manipulation__c.Character_Count_Map__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Litify_Data_Manipulation__c.Decoded__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Litify_Data_Manipulation__c.Encoded__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Litify_Data_Manipulation__c.Reversed__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Litify_Association__c-Litify Association Layout</layout>
     </layoutAssignments>
@@ -43,9 +63,16 @@
     <layoutAssignments>
         <layout>Litify_Case__c-Litify Case Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>Litify_Data_Manipulation__c-Litify Data Manipulation Layout</layout>
+    </layoutAssignments>
     <tabVisibilities>
         <tab>Case_Member_Hierarchy</tab>
         <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Data_Manipulation</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Litify_Association__c</tab>
