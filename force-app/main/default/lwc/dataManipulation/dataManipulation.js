@@ -1,55 +1,42 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, track } from 'lwc';
+import {mapToJSON} from 'c/utilities';
 
 export default class DataManipulation extends LightningElement {
-	@track recordId;
-	@track showFields = false;
-	@track chartConfiguration;
-
-	// TODO: Delete these
-	@track encodedString = 'Z29kIHl6YWwgZWh0IHJldm8gc3BtdWogeG9mIG53b3JiIGtjaXVxIGVoVA==';
-	// french fires: ZnJlbmNoIGZyaWVz
-	@track decodedString = '';
-	@track reversedString = '';
 	@track characterData = '';
+	@track chartConfiguration;
+	@track decodedString = '';
+	@track encodingString = '';
+	@track reversedString = '';
+	@track showFields = false;
+
 	characterMap = new Map();
 	chartData = [];
 	chartLabels = [];
 	ignoreCase = false;
 	sortCharacters = false;
 
-	connectedCallback() {
-		console.log('connectedCallback');
-		console.log(this.encodedString);
-		// this.decodedString = window.atob(this.encodedString);
-		// console.log('decodedString: ' + this.decodedString);
-		// this.reverseString();
+	handleIgnoreCaseChange() {
+		this.ignoreCase = !this.ignoreCase;
 		this.processData();
+		this.updateChart();
 	}
 
-	handleCreateNewRecordClick() {
+	handleNewSessionInput(event) {
+		let reader = new FileReader();
+		// TODO: Add in some error checking
+		reader.onload = (() => {
+			this.encodedString = reader.result;
+			this.processData();
+			this.updateChart();
+		});
 
+		reader.readAsText(event.target.files[0]);
 	}
 
 	handleSortCharactersChange() {
 		this.sortCharacters = !this.sortCharacters;
 		this.processData();
 		this.updateChart();
-	}
-
-	handleIgnoreCaseChange() {
-		this.ignoreCase = !this.ignoreCase;
-		console.log('this.ignoreCase: ' + this.ignoreCase);
-		this.processData();
-		this.updateChart();
-	}
-
-	handleReadAndManipulateClick() {
-		this.resetData();
-		console.log('handleReadAndManipulateClick encodedString: ' + this.encodedString);
-		this.decodedString = window.atob(this.encodedString);
-		console.log('decodedString: ' + this.decodedString);
-		this.reverseString();
-		// this.template.querySelector('[data-id="Encoded__c"').value = this.encodedString;
 	}
 
 	handleSuccess(event) {
@@ -59,10 +46,6 @@ export default class DataManipulation extends LightningElement {
 	}
 
 	loadChartData() {
-		let data = this.mapToJSON(this.characterMap);
-		console.log('data: ' + data);
-		console.log('chartData: ' + this.chartData);
-		console.log('chartLabels: ' + this.chartLabels);
 		this.chartConfiguration = {
 			type: 'bar',
 			data: {
@@ -75,7 +58,6 @@ export default class DataManipulation extends LightningElement {
 					maxBarThickness: 8,
 					minBarLength: 2,
 					backgroundColor: "green",
-					// data: this.mapToJSON(this.characterMap),
 					data: this.chartData
 				},
 				],
@@ -83,11 +65,10 @@ export default class DataManipulation extends LightningElement {
 			options: {
 				scales: {
 					yAxes: [{
-						display: true,
-						stacked: true,
+						// display: true,
+						// stacked: true,
 						ticks: {
-							min: 0, // minimum value
-							// max: 10 // maximum value
+							min: 0
 						}
 					}]
 				}
@@ -103,17 +84,6 @@ export default class DataManipulation extends LightningElement {
 		this.loadChartData();
 	}
 
-	handleNewSessionInput(event) {
-		let reader = new FileReader();
-		reader.onload = (() => {
-			this.encodedString = reader.result;
-			this.processData();
-			this.updateChart();
-		});
-
-		reader.readAsText(event.target.files[0]);
-	}
-
 	resetData() {
 		// this.encodedString = this.template.querySelector('[data-id="encoded"]').value;
 		this.decodedString = '';
@@ -122,6 +92,8 @@ export default class DataManipulation extends LightningElement {
 		this.chartConfiguration = {};
 	}
 
+	// This method works, but it is doing too much too inefficiently.
+	// Figure out a better way to do this
 	reverseString() {
 		let stringLength = this.decodedString.length;
 
@@ -133,8 +105,6 @@ export default class DataManipulation extends LightningElement {
 			this.characterMap.set(key, characterCount);
 		}
 
-		// This is not efficient
-		let unsortedMap = new Map();
 		if (this.sortCharacters) {
 			let sortedString = '';
 			if (this.ignoreCase) {
@@ -143,46 +113,25 @@ export default class DataManipulation extends LightningElement {
 			else {
 				sortedString = this.decodedString.split('').sort();
 			}
-			//unsortedMap = this.characterMap();
-			console.log('sortedString: ' + sortedString);
+
 			this.characterMap = new Map();
-			//stringLength = sortedString.length;
 			for (let i = 0; i < stringLength; i++) {
-				// this.sortedString += this.decodedString[i];
 				let key = this.ignoreCase ? sortedString[i].toUpperCase() : sortedString[i];
-				// let key = sortedString[i];
 				let characterCount = this.characterMap.get(key);
 				characterCount = characterCount == null ? 1 : characterCount + 1;
 				this.characterMap.set(key, characterCount);
 			}
 		}
 
-		console.log('this.reversedString: ' + this.reversedString);
-		console.log(this.characterMap);
 		this.chartLabels = [];
 		this.chartData = [];
 		let that = this;
 		this.characterMap.forEach(function (value, key) {
-			console.log(key + ':' + value);
 			that.chartLabels.push(key);
 			that.chartData.push(value);
 		});
 		console.log('after');
-		this.characterData = this.mapToJSON(this.characterMap);
-	}
-
-	// TODO: Move to utility
-	mapToJSON(map) {
-		return JSON.stringify([...map]);
-	}
-
-	// TODO: Move to utility
-	jsonToMap(jsonString) {
-		return new Map(JSON.parse(jsonString));
-	}
-
-	handleUploadFinished() {
-		console.log('uploaded:');
+		this.characterData = mapToJSON(this.characterMap);
 	}
 
 	updateChart() {

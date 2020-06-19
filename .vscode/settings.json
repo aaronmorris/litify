@@ -1,7 +1,9 @@
 {
 	"salesforcedx-vscode-core.show-cli-success-msg": false,
 	"cSpell.words": [
-		"litify"
+		"chartjs",
+		"litify",
+		"xlink"
 	],
 	"salesforcedx-vscode-apex.java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.6.jdk/Contents/Home",
 	"javascript.implicitProjectConfig.experimentalDecorators": true
