@@ -8,6 +8,8 @@ export default class Chart extends LightningElement {
 	@api chartConfig;
 
 	@track isChartJsInitialized;
+
+	chart;
 	renderedCallback() {
 		if (this.isChartJsInitialized) {
 			return;
@@ -17,7 +19,7 @@ export default class Chart extends LightningElement {
 		Promise.all([loadScript(this, chartjs)])
 			.then(() => {
 				this.isChartJsInitialized = true;
-				const ctx = this.template.querySelector('canvas.barChart').getContext('2d');
+				let ctx = this.template.querySelector('canvas.barChart').getContext('2d');
 				this.chart = new window.Chart(ctx, JSON.parse(JSON.stringify(this.chartConfig), {
 					scaleOverride: true,
 					scaleSteps: 10,
@@ -41,8 +43,14 @@ export default class Chart extends LightningElement {
 	}
 
 	@api updateChart(data) {
-		const ctx = this.template.querySelector('canvas.barChart').getContext('2d');
-		this.chart = new window.Chart(ctx, JSON.parse(JSON.stringify(data), {
+		let canvas = this.template.querySelector('canvas.barChart')
+		let context = canvas.getContext('2d');
+		// context.clearRect(0, 0, canvas.width, canvas.height);
+		this.chart.config.data.datasets[0].data = [];
+		this.chart.config.data.labels = [];
+		this.chart.update();
+
+		this.chart = new window.Chart(context, JSON.parse(JSON.stringify(data), {
 			scaleOverride: true,
 			scaleSteps: 10,
 			scaleStepWidth: 50,

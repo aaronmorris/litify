@@ -8,7 +8,7 @@
 					<div class="slds-file-selector slds-file-selector_files">
 						<div class="slds-file-selector__dropzone">
 							<input type="file" onchange={handleNewSessionInput}
-								class="slds-file-selector__input slds-assistive-text" accept="*.txt"
+								class="slds-file-selector__input slds-assistive-text" accept=".txt"
 								id="file-upload-input-01"
 								aria-labelledby="file-selector-primary-label file-selector-secondary-label" />
 							<label class="slds-file-selector__body" for="file-upload-input-01"
@@ -40,14 +40,24 @@
 								onchange={handleSortCharactersChange}>
 							</lightning-input>
 						</lightning-layout-item>
+						<lightning-layout-item padding="around-small">
+							<lightning-input type="toggle" label="Remove Whitespace" onchange={handleRemoveWhitespaceChange}>
+							</lightning-input>
+						</lightning-layout-item>
+						<lightning-layout-item padding="around-small">
+							<lightning-input type="toggle" label="Remove Special Characters" onchange={handleRemoveSpecialCharactersChange}></lightning-input>
+						</lightning-layout-item>
 					</lightning-layout>
 				</div>
 				<lightning-tabset>
-					<lightning-tab label="Chart">
-						<c-chart chart-config={chartConfiguration}></c-chart>
+					<lightning-tab label="Bar Chart">
+						<c-chart chart-config={chartConfiguration} data-id="barChart"></c-chart>
 					</lightning-tab>
-					<lightning-tab label="Raw Data">
-						<div id="rawData" data-id="rawData">{characterData}</div>
+					<lightning-tab label="Pie Chart">
+						<c-chart chart-config={pieChartConfiguration} data-id="pieChart"></c-chart>
+					</lightning-tab>
+					<lightning-tab label="Data Table">
+						<lightning-datatable data={characterDataTable} columns={columns} key-field="character"></lightning-datatable>
 					</lightning-tab>
 				</lightning-tabset>
 			</template>

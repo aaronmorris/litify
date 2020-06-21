@@ -1,72 +1,174 @@
 import { LightningElement, track } from 'lwc';
 import {mapToJSON} from 'c/utilities';
 
+const columns = [
+	{label: 'Character', fieldName: 'character'},
+	{label: 'ascii', fieldName: 'ascii', type: 'text'},
+	{label: 'count', fieldName: 'count', type: 'text'}
+];
+
 export default class DataManipulation extends LightningElement {
-	@track characterData = '';
+	@track characterDataTable = [];
 	@track chartConfiguration;
 	@track decodedString = '';
-	@track encodingString = '';
+	// TODO remove default value
+	@track encodingString = 'Z29kIHl6YWwgZWh0IHJldm8gc3BtdWogeG9mIG53b3JiIGtjaXVxIGVoVA==';
+	@track pieChartConfiguration;
+	@track recordId;
 	@track reversedString = '';
 	@track showFields = false;
 
 	characterMap = new Map();
-	chartData = [];
-	chartLabels = [];
+	chartColors = [];
+	columns = columns;
 	ignoreCase = false;
+	dataDisplayMap = new Map();
+	removeWhitespace = false;
+	removeSpecialCharacters = false;
 	sortCharacters = false;
+
+	connectedCallback() {
+		// this.processData();
+	}
 
 	handleIgnoreCaseChange() {
 		this.ignoreCase = !this.ignoreCase;
 		this.processData();
-		this.updateChart();
 	}
 
 	handleNewSessionInput(event) {
 		let reader = new FileReader();
-		// TODO: Add in some error checking
+		// TODO: Add in some error checking file was uploaded and is base64encoded
 		reader.onload = (() => {
 			this.encodedString = reader.result;
 			this.processData();
-			this.updateChart();
 		});
 
 		reader.readAsText(event.target.files[0]);
 	}
 
+	handleRemoveSpecialCharactersChange() {
+		this.removeSpecialCharacters = !this.removeSpecialCharacters;
+		this.processData();
+	}
+
+	handleRemoveWhitespaceChange() {
+		this.removeWhitespace = !this.removeWhitespace;
+		this.processData();
+	}
+
 	handleSortCharactersChange() {
 		this.sortCharacters = !this.sortCharacters;
 		this.processData();
-		this.updateChart();
 	}
 
 	handleSuccess(event) {
 		this.recordId = event.detail.id;
 		this.resetData();
-		console.log('this.recordId: ' + this.recordId);
 	}
 
-	loadChartData() {
+	analyzeString() {
+		let base = this.ignoreCase ? this.reversedString.toUpperCase() : this.reversedString;
+		if (this.sortCharacters) {
+			base = base.split('').sort().join('');
+		}
+
+		if (this.removeWhitespace) {
+			base = base.replace(/\s+/g, '');
+		}
+
+		if (this.removeSpecialCharacters) {
+			base = base.replace(/[^A-Za-z0-9\s]/g,'');
+		}
+
+		let stringLength = base.length;
+
+		for (let i = 0; i < stringLength; i++) {
+			let key = base[i];
+			let characterCount = this.characterMap.get(key);
+			characterCount = characterCount == null ? 1 : characterCount + 1;
+			this.characterMap.set(key, characterCount);
+			this.dataDisplayMap.set(key + ':' + key.charCodeAt(0), characterCount);
+
+		}
+
+		this.createDateTable();
+	}
+
+	createDateTable() {
+		this.characterDataTable = [];
+		let component = this;
+		this.characterMap.forEach(function(value, key) {
+			let row = {
+				character: key,
+				ascii: key.charCodeAt(0).toString(),
+				count: value.toString()
+			};
+
+			component.characterDataTable.push(row);
+
+			let r = Math.floor(Math.random() * 200);
+			let g = Math.floor(Math.random() * 200);
+			let b = Math.floor(Math.random() * 200);
+			component.chartColors.push('rgb(' + r + ', ' + g + ', ' + b + ')');
+		});
+	}
+
+	processData() {
+		this.resetData();
+		this.showFields = true;
+		this.decodedString = window.atob(this.encodedString);
+		this.reverseString();
+		this.analyzeString();
+		this.setChartConfiguration();
+		this.updateChart();
+	}
+
+	resetData() {
+		this.decodedString = '';
+		this.reversedString = '';
+		this.characterMap = new Map();
+		this.dataDisplayMap = new Map();
+		this.chartConfiguration = {};
+	}
+
+	reverseString() {
+		this.reversedString = this.decodedString.split('').reverse().join('');
+	}
+
+	setChartConfiguration() {
+		this.pieChartConfiguration = {
+			type: 'pie',
+			data: {
+				labels: [...this.characterMap.keys()],
+				datasets: [
+					{
+					label: 'Letter Frequency',
+					data: [...this.characterMap.values()],
+					backgroundColor: this.chartColors
+					}
+				]
+			}
+		}
 		this.chartConfiguration = {
 			type: 'bar',
 			data: {
-				labels: this.chartLabels,
+				labels: [...this.characterMap.keys()],
 				datasets: [
 				{
-					label: 'Character Count',
+					label: 'Letter Frequency',
 					barPercentage: 0.5,
 					barThickness: 6,
 					maxBarThickness: 8,
 					minBarLength: 2,
-					backgroundColor: "green",
-					data: this.chartData
+					backgroundColor: 'blue',
+					data: [...this.characterMap.values()]
 				},
 				],
 			},
 			options: {
 				scales: {
 					yAxes: [{
-						// display: true,
-						// stacked: true,
 						ticks: {
 							min: 0
 						}
@@ -76,65 +178,8 @@ export default class DataManipulation extends LightningElement {
 		};
 	}
 
-	processData() {
-		this.resetData();
-		this.showFields = true;
-		this.decodedString = window.atob(this.encodedString);
-		this.reverseString();
-		this.loadChartData();
-	}
-
-	resetData() {
-		// this.encodedString = this.template.querySelector('[data-id="encoded"]').value;
-		this.decodedString = '';
-		this.reversedString = '';
-		this.characterMap = new Map();
-		this.chartConfiguration = {};
-	}
-
-	// This method works, but it is doing too much too inefficiently.
-	// Figure out a better way to do this
-	reverseString() {
-		let stringLength = this.decodedString.length;
-
-		for (let i = stringLength - 1; i >= 0; i--) {
-			this.reversedString += this.decodedString[i];
-			let key = this.ignoreCase ? this.decodedString[i].toUpperCase() : this.decodedString[i];
-			let characterCount = this.characterMap.get(key);
-			characterCount = characterCount == null ? 1 : characterCount + 1;
-			this.characterMap.set(key, characterCount);
-		}
-
-		if (this.sortCharacters) {
-			let sortedString = '';
-			if (this.ignoreCase) {
-				sortedString = this.decodedString.toUpperCase().split('').sort();
-			}
-			else {
-				sortedString = this.decodedString.split('').sort();
-			}
-
-			this.characterMap = new Map();
-			for (let i = 0; i < stringLength; i++) {
-				let key = this.ignoreCase ? sortedString[i].toUpperCase() : sortedString[i];
-				let characterCount = this.characterMap.get(key);
-				characterCount = characterCount == null ? 1 : characterCount + 1;
-				this.characterMap.set(key, characterCount);
-			}
-		}
-
-		this.chartLabels = [];
-		this.chartData = [];
-		let that = this;
-		this.characterMap.forEach(function (value, key) {
-			that.chartLabels.push(key);
-			that.chartData.push(value);
-		});
-		console.log('after');
-		this.characterData = mapToJSON(this.characterMap);
-	}
-
 	updateChart() {
-		this.template.querySelector('c-chart').updateChart(this.chartConfiguration);
+		this.template.querySelector('[data-id="barChart"]').updateChart(this.chartConfiguration);
+		this.template.querySelector('[data-id="pieChart"]').updateChart(this.pieChartConfiguration);
 	}
 }

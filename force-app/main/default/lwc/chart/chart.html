@@ -1,5 +1,5 @@
 <template>
-    <div class="slds-p-around_small slds-grid slds-grid--vertical-align-center slds-grid--align-center" id="chart-container">
+    <div class="slds-p-around_small slds-grid slds-grid--vertical-align-center slds-grid--align-center" id="chart-container" data-id="chart-container">
         <canvas class="barChart" lwc:dom="manual" height="100"></canvas>
         <div if:false={isChartJsInitialized} class="slds-col--padded slds-size--1-of-1">
             <lightning-spinner alternative-text="Loading" size="medium" variant={loaderVariant}></lightning-spinner>
