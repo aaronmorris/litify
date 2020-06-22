@@ -13,6 +13,12 @@
             ],
             "c/caseMemberHierarchy": [
                 "caseMemberHierarchy/caseMemberHierarchy.js"
+            ],
+            "c/dataManipulation": [
+                "dataManipulation/dataManipulation.js"
+            ],
+            "c/chart": [
+                "chart/chart.js"
             ]
         },
         "experimentalDecorators": true
