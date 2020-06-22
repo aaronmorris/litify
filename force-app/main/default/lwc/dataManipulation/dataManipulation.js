@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import {mapToJSON} from 'c/utilities';
+import {isBase64, showToastMessage} from 'c/utilities';
 
 const columns = [
 	{label: 'Character', fieldName: 'character'},
@@ -11,10 +11,8 @@ export default class DataManipulation extends LightningElement {
 	@track characterDataTable = [];
 	@track chartConfiguration;
 	@track decodedString = '';
-	// TODO remove default value
-	@track encodingString = 'Z29kIHl6YWwgZWh0IHJldm8gc3BtdWogeG9mIG53b3JiIGtjaXVxIGVoVA==';
+	@track encodingString = '';
 	@track pieChartConfiguration;
-	@track recordId;
 	@track reversedString = '';
 	@track showFields = false;
 
@@ -22,14 +20,9 @@ export default class DataManipulation extends LightningElement {
 	chartColors = [];
 	columns = columns;
 	ignoreCase = false;
-	dataDisplayMap = new Map();
 	removeWhitespace = false;
 	removeSpecialCharacters = false;
 	sortCharacters = false;
-
-	connectedCallback() {
-		// this.processData();
-	}
 
 	handleIgnoreCaseChange() {
 		this.ignoreCase = !this.ignoreCase;
@@ -38,10 +31,16 @@ export default class DataManipulation extends LightningElement {
 
 	handleNewSessionInput(event) {
 		let reader = new FileReader();
-		// TODO: Add in some error checking file was uploaded and is base64encoded
 		reader.onload = (() => {
 			this.encodedString = reader.result;
-			this.processData();
+			if (isBase64(this.encodedString)) {
+				this.processData();
+			}
+			else {
+				showToastMessage('error', 'Invalid Encoding', 'The contents of the uploaded file are not base64 encoded.');
+				this.resetData();
+				this.showFields = false;
+			}
 		});
 
 		reader.readAsText(event.target.files[0]);
@@ -62,34 +61,15 @@ export default class DataManipulation extends LightningElement {
 		this.processData();
 	}
 
-	handleSuccess(event) {
-		this.recordId = event.detail.id;
-		this.resetData();
-	}
-
 	analyzeString() {
-		let base = this.ignoreCase ? this.reversedString.toUpperCase() : this.reversedString;
-		if (this.sortCharacters) {
-			base = base.split('').sort().join('');
-		}
-
-		if (this.removeWhitespace) {
-			base = base.replace(/\s+/g, '');
-		}
-
-		if (this.removeSpecialCharacters) {
-			base = base.replace(/[^A-Za-z0-9\s]/g,'');
-		}
-
-		let stringLength = base.length;
+		let filteredString = this.filterReversedString();
+		let stringLength = filteredString.length;
 
 		for (let i = 0; i < stringLength; i++) {
-			let key = base[i];
+			let key = filteredString[i];
 			let characterCount = this.characterMap.get(key);
 			characterCount = characterCount == null ? 1 : characterCount + 1;
 			this.characterMap.set(key, characterCount);
-			this.dataDisplayMap.set(key + ':' + key.charCodeAt(0), characterCount);
-
 		}
 
 		this.createDateTable();
@@ -114,6 +94,23 @@ export default class DataManipulation extends LightningElement {
 		});
 	}
 
+	filterReversedString() {
+		let filtered = this.ignoreCase ? this.reversedString.toUpperCase() : this.reversedString;
+		if (this.sortCharacters) {
+			filtered = filtered.split('').sort().join('');
+		}
+
+		if (this.removeWhitespace) {
+			filtered = filtered.replace(/\s+/g, '');
+		}
+
+		if (this.removeSpecialCharacters) {
+			filtered = filtered.replace(/[^A-Za-z0-9\s]/g,'');
+		}
+
+		return filtered;
+	}
+
 	processData() {
 		this.resetData();
 		this.showFields = true;
@@ -128,7 +125,6 @@ export default class DataManipulation extends LightningElement {
 		this.decodedString = '';
 		this.reversedString = '';
 		this.characterMap = new Map();
-		this.dataDisplayMap = new Map();
 		this.chartConfiguration = {};
 	}
 
@@ -150,6 +146,7 @@ export default class DataManipulation extends LightningElement {
 				]
 			}
 		}
+
 		this.chartConfiguration = {
 			type: 'bar',
 			data: {
@@ -179,7 +176,14 @@ export default class DataManipulation extends LightningElement {
 	}
 
 	updateChart() {
-		this.template.querySelector('[data-id="barChart"]').updateChart(this.chartConfiguration);
-		this.template.querySelector('[data-id="pieChart"]').updateChart(this.pieChartConfiguration);
+		let barChart = this.template.querySelector('[data-id="barChart"]');
+		if (barChart != null) {
+			barChart.updateChart(this.chartConfiguration);
+		}
+
+		let pieChart = this.template.querySelector('[data-id="pieChart"]');
+		if (pieChart != null) {
+			pieChart.updateChart(this.pieChartConfiguration);
+		}
 	}
 }

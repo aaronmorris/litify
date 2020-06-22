@@ -45,7 +45,6 @@ export default class Chart extends LightningElement {
 	@api updateChart(data) {
 		let canvas = this.template.querySelector('canvas.barChart')
 		let context = canvas.getContext('2d');
-		// context.clearRect(0, 0, canvas.width, canvas.height);
 		this.chart.config.data.datasets[0].data = [];
 		this.chart.config.data.labels = [];
 		this.chart.update();
