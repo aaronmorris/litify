@@ -18,6 +18,6 @@
   "homepage": "https://github.com/aaronmorris/litify#readme",
   "devDependencies": {
     "@salesforce/eslint-config-lwc": "^0.7.0",
-    "eslint": "^7.2.0"
+    "eslint": "^9.39.1"
   }
 }
